@@ -1,0 +1,42 @@
+body {
+    overflow: hidden; /* Evita scrollbars en la página */
+    display: flex;
+    justify-content: center;
+    background-image: url('../../../images/fondo.jpg'); /* URL de la imagen de fondo */
+    background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+.iframe-container {
+    width: 150vw; /* Ajusta el tamaño del contenedor según el ancho de la ventana */
+    height: 150vh; /* Ajusta el tamaño del contenedor según el alto de la ventana */
+    overflow: hidden; /* Oculta cualquier desbordamiento */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+iframe {
+    width: 1030px; /* Tamaño del contenido original */
+    height: 800px; /* Tamaño del contenido original */
+    transform: scale(0.7); /* Escala menor para reducir más el tamaño del contenido */
+    transform-origin: top left; /* Escala desde la esquina superior izquierda */
+    border: 1px solid #000;
+}
+
+ #siguiente-button {
+            position: fixed; /* Posiciona el botón de manera fija */
+            bottom: 20px; /* Margen inferior */
+            right: 20px; /* Margen derecho */
+            padding: 10px 20px; /* Espaciado interno */
+            font-size: 16px; /* Tamaño de fuente */
+            cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+            background-color: #4CAF50; /* Color de fondo */
+            color: white; /* Color del texto */
+            border: none; /* Sin borde */
+            border-radius: 5px; /* Bordes redondeados */
+            transition: background-color 0.3s; /* Transición suave para el color de fondo */
+        }
+
+        #siguiente-button:hover {
+            background-color: #45a049; /* Color de fondo al pasar el ratón */
+        }

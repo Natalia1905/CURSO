@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <ul class="menu">
+                <li><a href="../ink/index.html">Home</a></li>
+                <li class="active"><a href="registro.html">Registrarse</a></li>
+                <li><a href="inicio_sesion.html">Iniciar Sesión</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <form action="php/register.php" method="POST" class="fh5co-form">
+        <div id="step1" class="text-center">
+            <h2>Para dar de alta a menores de edad deberán ser sus padres o tutores quienes completen el registro.</h2>
+            <p>¿Para quién es esta cuenta de EDUPLAY?</p>
+            <button type="button" id="option-mujer" class="btn btn-primary">Mujer</button>
+            <button type="button" id="option-hombre" class="btn btn-primary">Hombre</button>
+        </div>
+
+        <div id="step2" class="text-center" style="display: none;">
+            <h2>¿Cómo se llama?</h2>
+            <input type="text" class="form-control" id="nombre" placeholder="Escriba su nombre" required oninput="validarCampo()">
+            <button type="button" id="btn-nombre" class="btn btn-primary" style="margin-top: 15px;" onclick="validarNombre()" disabled>Continuar</button>
+            <div id="advertencia" style="color: red; display: none; margin-top: 10px;">Completa este campo.</div>
+        </div>
+        
+        <script>
+        function validarCampo() {
+            const nombreInput = document.getElementById('nombre').value.trim();
+            const advertencia = document.getElementById('advertencia');
+            const btnContinuar = document.getElementById('btn-nombre');
+        
+            if (nombreInput === '') {
+                advertencia.style.display = 'block'; // Muestra la advertencia
+                btnContinuar.disabled = true; // Desactiva el botón
+            } else {
+                advertencia.style.display = 'none'; // Oculta la advertencia
+                btnContinuar.disabled = false; // Activa el botón
+            }
+        }
+        
+        function validarNombre() {
+            const nombreInput = document.getElementById('nombre').value.trim();
+            const advertencia = document.getElementById('advertencia');
+        
+            if (nombreInput === '') {
+                advertencia.style.display = 'block'; // Muestra la advertencia si se intenta continuar
+            } else {
+                advertencia.style.display = 'none'; // Oculta la advertencia
+                // Aquí puedes agregar la lógica para continuar
+                console.log('Nombre ingresado:', nombreInput);
+                // Por ejemplo, podrías ocultar este div y mostrar el siguiente
+            }
+        }
+        </script>
+        
+
+        <div id="step3" class="text-center" style="display: none;">
+            <h2>¿Tiene alguna necesidad educativa especial?</h2>
+            <button type="button" id="btn-si" class="btn btn-primary" onclick="mostrarStep4()">Sí</button>
+            <button type="button" id="btn-no" class="btn btn-primary" onclick="setNecesidad('ninguna')">No</button>
+        </div>
+
+        <div id="step4" class="text-center" style="display: none;">
+            <h2>Por favor, indícanos cuál:</h2>
+            <label><input type="radio" name="educativa" value="sensorial_auditiva" onclick="validarSeleccion()"> Discapacidad sensorial auditiva</label><br>
+            <label><input type="radio" name="educativa" value="sindrome_down" onclick="validarSeleccion()"> Síndrome de Down</label><br>
+            <button type="button" id="btn-necesidades" class="btn btn-primary" onclick="continuarRegistro()" disabled>Continuar</button>
+            <div id="advertencia-necesidades" style="color: red; display: none; margin-top: 10px;">Por favor, selecciona una opción.</div>
+        </div>
+        
+        <script>
+        function validarSeleccion() {
+            const radios = document.getElementsByName('educativa');
+            const advertencia = document.getElementById('advertencia-necesidades');
+            const btnContinuar = document.getElementById('btn-necesidades');
+            let seleccionado = false;
+        
+            // Verifica si algún radio está seleccionado
+            for (let radio of radios) {
+                if (radio.checked) {
+                    seleccionado = true;
+                    break;
+                }
+            }
+        
+            if (seleccionado) {
+                advertencia.style.display = 'none'; // Oculta la advertencia
+                btnContinuar.disabled = false; // Activa el botón
+            } else {
+                advertencia.style.display = 'block'; // Muestra la advertencia
+                btnContinuar.disabled = true; // Desactiva el botón
+            }
+        }
+        
+        function continuarRegistro() {
+            const radios = document.getElementsByName('educativa');
+            const advertencia = document.getElementById('advertencia-necesidades');
+            let seleccionado = false;
+        
+            // Verifica si algún radio está seleccionado
+            for (let radio of radios) {
+                if (radio.checked) {
+                    seleccionado = true;
+                    break;
+                }
+            }
+        
+            if (!seleccionado) {
+                advertencia.style.display = 'block'; // Muestra la advertencia si no hay selección
+            } else {
+                advertencia.style.display = 'none'; // Oculta la advertencia
+                // Aquí puedes agregar la lógica para continuar
+                console.log('Opción seleccionada:', document.querySelector('input[name="educativa"]:checked').value);
+                // Por ejemplo, podrías ocultar este div y mostrar el siguiente
+            }
+        }
+        </script>
+        
+
+        <div id="step5" class="text-center" style="display: none;">
+            <h2>Regístrate</h2>
+            <input type="hidden" name="genero" id="input-genero">
+            <input type="hidden" name="nombre" id="input-nombre">
+            <div class="form-group">
+                <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="username" name="nom_completo" placeholder="Nombre Completo" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="contrase" name="contrase" placeholder="Contraseña" required>
+            </div>
+            <input type="submit" value="Registrarse" class="btn btn-primary">
+        </div>
+    </form>
+
+    <div class="row" style="padding-top: 60px;">
+        <div class="col-md-12 text-center"><p><small>&copy; Todos los derechos reservados</small></p></div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('option-mujer').addEventListener('click', function() {
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+        document.getElementById('input-genero').value = 'mujer';
+    });
+
+    document.getElementById('option-hombre').addEventListener('click', function() {
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+        document.getElementById('input-genero').value = 'hombre';
+    });
+
+    document.getElementById('btn-nombre').addEventListener('click', function() {
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('step3').style.display = 'block';
+        document.getElementById('input-nombre').value = document.getElementById('nombre').value;
+    });
+
+    function mostrarStep4() {
+        document.getElementById('step3').style.display = 'none';
+        document.getElementById('step4').style.display = 'block';
+    }
+
+    function setNecesidad(value) {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "educativa";
+        input.value = value;
+        document.forms[0].appendChild(input);
+        document.getElementById('step3').style.display = 'none';
+        document.getElementById('step5').style.display = 'block';
+    }
+
+    function continuarRegistro() {
+        document.getElementById('step4').style.display = 'none';
+        document.getElementById('step5').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>

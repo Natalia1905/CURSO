@@ -1,0 +1,24 @@
+.styled-button {
+    background-color: #4CAF50; /* Color verde */
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.styled-button:hover {
+    background-color: #45a049; /* Color verde más oscuro */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño al hacer hover */
+}
+
+.styled-button:active {
+    background-color: #3e8e41; /* Color más oscuro al presionar */
+    transform: scale(0.95); /* Disminuye el tamaño al hacer clic */
+}
